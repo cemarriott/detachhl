@@ -31,6 +31,7 @@ public:
     sArgs.Split(",", hList, false, "", "", false, true);
 
     PutModule("Phrases to highlight: ");
+
     for (CString phrase : hList) {
       PutModule(phrase);
     }

@@ -49,8 +49,8 @@ public:
 
     if (Channel.IsDetached()) {
       if (sMessage.find(highlight) != CString::npos) {
-        PutModule("You have been highlighted in [" + Channel.GetName()
-        + "] by user [" + Nick.GetNick() + "].");
+        PutModule("<" + Channel.GetName() + "/" + Nick.GetNick() + "> "
+        + sMessage);
       }
     }
 

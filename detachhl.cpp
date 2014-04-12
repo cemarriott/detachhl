@@ -26,7 +26,7 @@ public:
 	MODCONSTRUCTOR(DetachHL) {}
 
 	virtual bool OnLoad(const CString& sArgs, CString& sMessage) {
-		PutModule("I'm being loaded with the arguments: [" + sArgs + "]");
+		DEBUG("Loading DetachHL module.");
 
     highlight = GetNV("highlight");
     if (highlight.empty()) highlight = GetUser()->GetNick();
@@ -66,4 +66,4 @@ template<> void TModInfo<DetachHL>(CModInfo& Info) {
 	Info.SetHasArgs(false);
 }
 
-USERMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")
+NETWORKMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")

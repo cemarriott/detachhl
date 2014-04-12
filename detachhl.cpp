@@ -48,7 +48,7 @@ public:
 	virtual EModRet OnChanMsg(CNick& Nick, CChan& Channel, CString& sMessage) {
 
     if (Channel.IsDetached()) {
-      if (sMessage.find(highlight) != CString::npos) {
+      if ((sMessage.AsLower()).find(highlight.AsLower()) != CString::npos) {
         PutModule("<" + Channel.GetName() + "/" + Nick.GetNick() + "> "
         + sMessage);
       }

@@ -29,6 +29,7 @@ public:
 		PutModule("Loading DetachHL module.");
 
     sArgs.Split(",", hList, false, "", "", false, true);
+    hList.push_back(GetUser()->GetNick());
 
     PutModule("Phrases to highlight: ");
 

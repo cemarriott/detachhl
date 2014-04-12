@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <znc/Client.h>
 #include <znc/Chan.h>
 #include <znc/Modules.h>
 
@@ -48,7 +47,10 @@ public:
 	virtual EModRet OnChanMsg(CNick& Nick, CChan& Channel, CString& sMessage) {
 
     if (Channel.IsDetached()) {
-      
+      if (sMessage.find(highlight) != CString::npos) {
+        PutModule("You have been highlighted in [" + Channel->GetName()
+        + "] by user [" + Nick->GetNick() + "].");
+      }
     }
 
 		return CONTINUE;
@@ -58,10 +60,9 @@ private:
     CString highlight;
 };
 
-template<> void TModInfo<CSampleMod>(CModInfo& Info) {
-	Info.SetWikiPage("sample");
-	Info.SetHasArgs(true);
-	Info.SetArgsHelpText("Description of module arguments goes here.");
+template<> void TModInfo<DetachHL>(CModInfo& Info) {
+	Info.SetWikiPage("DetachHL");
+	Info.SetHasArgs(false);
 }
 
 USERMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")

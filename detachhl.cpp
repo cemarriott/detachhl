@@ -16,6 +16,7 @@
 
 #include <znc/Chan.h>
 #include <znc/Modules.h>
+#include <znc/User.h>
 
 using std::vector;
 
@@ -35,7 +36,7 @@ public:
 		return true;
 	}
 
-	virtual ~CSampleMod() {
+	virtual ~DetachHL() {
 		PutModule("DetachHL module here.");
 	}
 
@@ -48,8 +49,8 @@ public:
 
     if (Channel.IsDetached()) {
       if (sMessage.find(highlight) != CString::npos) {
-        PutModule("You have been highlighted in [" + Channel->GetName()
-        + "] by user [" + Nick->GetNick() + "].");
+        PutModule("You have been highlighted in [" + Channel.GetName()
+        + "] by user [" + Nick.GetNick() + "].");
       }
     }
 

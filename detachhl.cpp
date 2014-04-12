@@ -32,8 +32,11 @@ public:
 
     PutModule("Phrases to highlight: ");
 
-    for (CString phrase : hList) {
-      PutModule(phrase);
+    for (std::vector<CString>::iterator it = hList.begin();
+        it != hList.end(); ++it) {
+
+      PutModule(*it);
+
     }
 
 		return true;
@@ -51,10 +54,19 @@ public:
 	virtual EModRet OnChanMsg(CNick& Nick, CChan& Channel, CString& sMessage) {
 
     if (Channel.IsDetached()) {
-      if ((sMessage.AsLower()).find(highlight.AsLower()) != CString::npos) {
-        PutModule("<" + Channel.GetName() + "/" + Nick.GetNick() + "> "
-        + sMessage);
+
+      for (std::vector<CString>::iterator it = hList.begin();
+          it != hList.end(); ++it) {
+
+        if ((sMessage.AsLower()).find((*it).AsLower()) != CString::npos) {
+          PutModule("<" + Channel.GetName() + "/" + Nick.GetNick() + "> "
+          + sMessage);
+        }
+
+        return CONTINUE;
+
       }
+
     }
 
 		return CONTINUE;

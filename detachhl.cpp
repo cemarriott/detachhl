@@ -26,12 +26,14 @@ public:
 	MODCONSTRUCTOR(DetachHL) {}
 
 	virtual bool OnLoad(const CString& sArgs, CString& sMessage) {
-		DEBUG("Loading DetachHL module.");
+		PutModule("Loading DetachHL module.");
 
-    highlight = GetNV("highlight");
-    if (highlight.empty()) highlight = GetUser()->GetNick();
+    sArgs.Split(",", hList, false, "", "", false, true);
 
-    PutModule("Highlight set to: [" + highlight + "]");
+    PutModule("Phrases to highlight: ");
+    for (CString phrase : hList) {
+      PutModule(phrase);
+    }
 
 		return true;
 	}
@@ -58,7 +60,7 @@ public:
 	}
 
 private:
-    CString highlight;
+    vector<CString> hList;
 };
 
 template<> void TModInfo<DetachHL>(CModInfo& Info) {
@@ -66,4 +68,4 @@ template<> void TModInfo<DetachHL>(CModInfo& Info) {
 	Info.SetHasArgs(false);
 }
 
-GLOBALMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")
+NETWORKMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")

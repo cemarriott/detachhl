@@ -37,7 +37,7 @@ public:
 	}
 
 	virtual ~DetachHL() {
-		PutModule("DetachHL module here.");
+		PutModule("Module unloaded successfully.");
 	}
 
 	virtual bool OnBoot() {
@@ -66,4 +66,4 @@ template<> void TModInfo<DetachHL>(CModInfo& Info) {
 	Info.SetHasArgs(false);
 }
 
-NETWORKMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")
+GLOBALMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")

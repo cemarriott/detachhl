@@ -27,11 +27,17 @@ public:
 
 	virtual bool OnLoad(const CString& sArgs, CString& sMessage) {
 		PutModule("I'm being loaded with the arguments: [" + sArgs + "]");
+
+    highlight = GetNV("highlight");
+    if (highlight.empty()) highlight = GetUser()->GetNick();
+
+    PutModule("Highlight set to: [" + highlight + "]");
+
 		return true;
 	}
 
 	virtual ~CSampleMod() {
-		PutModule("I'm being unloaded!");
+		PutModule("DetachHL module here.");
 	}
 
 	virtual bool OnBoot() {
@@ -40,16 +46,16 @@ public:
 	}
 
 	virtual EModRet OnChanMsg(CNick& Nick, CChan& Channel, CString& sMessage) {
-		if (sMessage == "!ping") {
-			PutIRC("PRIVMSG " + Channel.GetName() + " :PONG?");
-		}
 
-		sMessage = "x " + sMessage + " x";
-
-		PutModule(sMessage);
+    if (Channel.IsDetached()) {
+      
+    }
 
 		return CONTINUE;
 	}
+
+private:
+    CString highlight;
 };
 
 template<> void TModInfo<CSampleMod>(CModInfo& Info) {

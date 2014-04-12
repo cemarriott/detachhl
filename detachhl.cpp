@@ -78,7 +78,7 @@ private:
 
 template<> void TModInfo<DetachHL>(CModInfo& Info) {
 	Info.SetWikiPage("DetachHL");
-	Info.SetHasArgs(false);
+	Info.SetHasArgs(true);
 }
 
 NETWORKMODULEDEFS(DetachHL, "Used to monitor highlights in detached channels")
